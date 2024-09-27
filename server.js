@@ -15,31 +15,31 @@ server.register(cors, {
 // ENDPOINTS (CRUD):
 
 // CREATE
-server.post('/users', async (request, reply) => {
+server.post('/livros', async (request, reply) => {
     const body = request.body;
-    await databasePostgres.createUser(body);
+    await databasePostgres.createLivro(body);
     return reply.status(201).send();
 })
 
 // READE
-server.get('/users', async () => {
-    const users = await databasePostgres.listUsers();
-    return users;
+server.get('/livros', async () => {
+    const livros = await databasePostgres.listLivros();
+    return livros;
 });
 
 // UPDATE
-server.put('/users/:id', async (request, reply) => {
-    const userID = request.params.id;
+server.put('/livros/:id', async (request, reply) => {
+    const livroID = request.params.id;
     const body = request.body;
-    await databasePostgres.updateUser(userID, body);
+    await databasePostgres.updateLivro(livroID, body);
 
     return reply.status(204).send();
 })
 
 // DELETE
-server.delete('/users/:id', async (request, reply) => {
-    const userID = request.params.id;
-    await databasePostgres.deleteUser(userID);
+server.delete('/livros/:id', async (request, reply) => {
+    const livroID = request.params.id;
+    await databasePostgres.deleteLivro(livroID);
 
     return reply.status(204).send();
 })

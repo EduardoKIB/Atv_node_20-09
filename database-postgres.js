@@ -2,37 +2,37 @@ import { randomUUID } from "crypto";
 import { sql } from './db.js';
 
 export class DatabasePostgres { 
-  async listUsers() {
-    const users = await sql`select * from users`;
-    return users;
+  async listLivros() {
+    const livros = await sql`select * from livros`;
+    return livros;
   }
 
-  async createUser(user) {
+  async createLivro(livro) {
     const id = randomUUID();
     console.log('id', id);
-    const name = user.name;
-    const password = user.password;
-    const profile = user.profile;
+    const titulo = livro.titulo;
+    const autor = livro.autor;
+    const genero = livro.genero;
     
-    await sql`insert into users (id, name, password, profile)
-    values (${id}, ${name}, ${password}, ${profile})`
+    await sql`insert into livros (id, titulo, autor, genero)
+    values (${id}, ${titulo}, ${autor}, ${genero})`
   }
 
-  async updateUser(id, user) {
-    const name = user.name;
-    const password = user.password;
-    const profile = user.profile;
+  async updateLivro(id, livro) {
+    const titulo = livro.titulo;
+    const autor = livro.autor;
+    const genero = livro.genero;
 
-    await sql`update users set 
-        name = ${name},
-        password = ${password},
-        profile = ${profile}
+    await sql`update livro set 
+        titulo = ${titulo},
+        autor = ${autor},
+        genero = ${genero}
         where id = ${id}
     `;
   }
 
-  async deleteUser(id) {
-    await sql`delete from users where id = ${id}`
+  async deleteLivro(id) {
+    await sql`delete from livros where id = ${id}`
   }
 
 }
